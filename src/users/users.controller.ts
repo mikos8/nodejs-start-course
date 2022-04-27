@@ -1,16 +1,20 @@
+import { HTTPError } from './../errors/http-error.class';
+import { ILogger } from 'src/logger/logger.interface';
+import { TYPES } from '../types';
 import { NextFunction, Response, Request } from 'express';
+import { inject, injectable } from 'inversify';
 import { BaseController } from "../common/base.controller";
-import { LoggerService } from "../logger/logger.service";
+import 'reflect-metadata'
 
 
-
+@injectable()
 export class UserController extends BaseController {
 
 
     constructor(
-        logger: LoggerService
+        @inject(TYPES.ILogger) private loggerService: ILogger
     ) {
-        super(logger);
+        super(loggerService);
         this.bindRoutes([
             { path: '/register', method: 'post', func: this.register },
             { path: '/login', method: 'post', func: this.login },
@@ -18,7 +22,8 @@ export class UserController extends BaseController {
     }
 
     login(req: Request, res: Response, next: NextFunction): void {
-        this.ok(res, 'login')
+        // this.ok(res, 'login')
+        next(new HTTPError(401, 'ошибка авторизации','login'))
     }
 
     register(req: Request, res: Response, next: NextFunction): void {

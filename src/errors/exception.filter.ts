@@ -1,10 +1,10 @@
 import { Response, NextFunction, Request } from 'express';
 import { inject, injectable } from 'inversify';
 import { ILogger } from 'src/logger/logger.interface';
-import { LoggerService } from 'src/logger/logger.service';
-import { TYPES } from 'src/types';
+import { TYPES } from '../types';
 import { IExceptionFitler } from './exception.filter.interface';
 import { HTTPError } from './http-error.class';
+import 'reflect-metadata'
 
 @injectable()
 export class ExeptionFilter implements IExceptionFitler {

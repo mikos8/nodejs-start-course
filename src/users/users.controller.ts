@@ -1,5 +1,5 @@
 import { HTTPError } from './../errors/http-error.class';
-import { ILogger } from 'src/logger/logger.interface';
+import { ILogger } from '../logger/logger.interface';
 import { TYPES } from '../types';
 import { NextFunction, Response, Request } from 'express';
 import { inject, injectable } from 'inversify';
@@ -9,8 +9,6 @@ import 'reflect-metadata'
 
 @injectable()
 export class UserController extends BaseController {
-
-
     constructor(
         @inject(TYPES.ILogger) private loggerService: ILogger
     ) {
@@ -27,6 +25,6 @@ export class UserController extends BaseController {
     }
 
     register(req: Request, res: Response, next: NextFunction): void {
-        this.ok(res, 'register')
+        this.ok<string>(res, 'register')
     }
 }

@@ -1,6 +1,6 @@
 import { Response, NextFunction, Request } from 'express';
 import { inject, injectable } from 'inversify';
-import { ILogger } from 'src/logger/logger.interface';
+import { ILogger } from '../logger/logger.interface';
 import { TYPES } from '../types';
 import { IExceptionFitler } from './exception.filter.interface';
 import { HTTPError } from './http-error.class';
@@ -10,7 +10,7 @@ import 'reflect-metadata'
 export class ExeptionFilter implements IExceptionFitler {
     constructor(@inject(TYPES.ILogger) private logger: ILogger) { }
 
-    catch(err: Error | HTTPError, req: Request, res: Response, next: NextFunction): void {
+    catch(err: Error | HTTPError, req: Request, res: Response, next: NextFunction) {
 
         if (err instanceof HTTPError) {
             this.logger.error(`[${err.context}] Ошибка -: ${err.statusCode} :: ${err.message}`);

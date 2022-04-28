@@ -109,7 +109,8 @@ class Bildog {
     name: string;
     tail: boolean;
 }
-
+let numIs: number;
+numIs = 10;
 const puppy: Animal = new Bildog();
 
 let aa: string;

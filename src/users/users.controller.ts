@@ -5,10 +5,11 @@ import { NextFunction, Response, Request } from 'express';
 import { inject, injectable } from 'inversify';
 import { BaseController } from "../common/base.controller";
 import 'reflect-metadata'
+import {IUsersController} from "./users.controller.interface";
 
 
 @injectable()
-export class UserController extends BaseController {
+export class UserController extends BaseController implements IUsersController{
     constructor(
         @inject(TYPES.ILogger) private loggerService: ILogger
     ) {
